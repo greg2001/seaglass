@@ -180,7 +180,7 @@ public final class ButtonPainter extends AbstractRegionPainter {
     @Override
     protected void doPaint(Graphics2D g, JComponentObject buttonType = c.getClientProperty("JButton.buttonType");
         ButtonVariants buttonVariants = normal;
-        if ("segmentedTextured".equals(buttonType)) {
+        if ("textured".equals(buttonType) || "segmentedTextured".equals(buttonType)) {
             buttonVariants = textured;
         }
 
