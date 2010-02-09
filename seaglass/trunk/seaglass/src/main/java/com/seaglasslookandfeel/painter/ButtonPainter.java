@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * $Id$
  */
 package com.seaglasslookandfeel.painter;
@@ -33,37 +33,29 @@ import com.seaglasslookandfeel.painter.button.TexturedButtonPainter;
  * the same except for the state. This actually delegates to a
  * SegmentedButtonPainter, which does the actual painting based on client
  * properties.
- * 
+ *
  * @author Kathryn Huxtable
  */
 public final class ButtonPainter extends AbstractRegionPainter {
-    public static enum Which {
-        BACKGROUND_DEFAULT,
-        BACKGROUND_DEFAULT_FOCUSED,
-        BACKGROUND_PRESSED_DEFAULT,
-        BACKGROUND_PRESSED_DEFAULT_FOCUSED,
-        BACKGROUND_DISABLED,
-        BACKGROUND_ENABLED,
-        BACKGROUND_FOCUSED,
-        BACKGROUND_PRESSED,
-        BACKGROUND_PRESSED_FOCUSED,
-        BACKGROUND_SELECTED,
-        BACKGROUND_SELECTED_FOCUSED,
-        BACKGROUND_PRESSED_SELECTED,
-        BACKGROUND_PRESSED_SELECTED_FOCUSED,
-        BACKGROUND_DISABLED_SELECTED
-    };
 
-    private PaintContext         ctx;
+    /**
+     * Control state.
+     */
+    public static enum Which {
+        BACKGROUND_DEFAULT, BACKGROUND_DEFAULT_FOCUSED, BACKGROUND_PRESSED_DEFAULT, BACKGROUND_PRESSED_DEFAULT_FOCUSED, BACKGROUND_DISABLED,
+        BACKGROUND_ENABLED, BACKGROUND_FOCUSED, BACKGROUND_PRESSED, BACKGROUND_PRESSED_FOCUSED, BACKGROUND_SELECTED,
+        BACKGROUND_SELECTED_FOCUSED, BACKGROUND_PRESSED_SELECTED, BACKGROUND_PRESSED_SELECTED_FOCUSED, BACKGROUND_DISABLED_SELECTED
+    }
+
+    private PaintContext ctx;
 
     private ButtonVariantPainter standard;
     private ButtonVariantPainter textured;
 
     /**
      * Create a new ButtonPainter.
-     * 
-     * @param ctx
-     *            the PaintContext to be used.
+     *
+     * @param statehe PaintContext to be used.
      * @param state
      *            the state of the button to be painte   
         this.ctx = new PaintContext(CacheMode.FIXED_SIZES);
@@ -77,13 +69,14 @@ public final class ButtonPainter extends AbstractRegionPainter {
      */
     protected Object[] getExtendedCacheKeys(JComponent c) {
         Object[] extendedCacheKeys = new Object[] {};
+
         return extendedCacheKeys;
     }
 
     /**
      * {@inheritDoc}
      */
-    protected final PaintContext getPaintContext() {
+    protected PaintContext getPaintContext() {
         return ctx;
     }
 
@@ -100,17 +93,19 @@ public final class ButtonPainter extends AbstractRegionPainter {
     /**
      * Determine the button painter variant from the component's client
      * property.
-     * 
-     * @param c
-     *            the component.
+     *
+     * @param  c the component.
+     *
      * @return the button painter variant.
      */
     private ButtonVariantPainter getButtonPainter(JComponent c) {
-        Object buttonType = c.getClientProperty("JButton.buttonType");
-        ButtonVariantPainter button = standard;
+        Object               buttonType = c.getClientProperty("JButton.buttonType");
+        ButtonVariantPainter button     = standard;
+
         if ("textured".equals(buttonType) || "segmentedTextured".equals(buttonType)) {
             button = textured;
         }
+
         return button;
     }
 }
